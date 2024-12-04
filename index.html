@@ -1,0 +1,214 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Markdown Viewer</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, Ubuntu, Cantarell, sans-serif;
+            overflow: hidden;
+            height: 100vh;
+            background: #f5f5f5;
+        }
+
+        .container {
+            display: flex;
+            height: 100vh;
+            position: relative;
+        }
+
+        nav {
+            width: 300px;
+            background: white;
+            height: 100vh;
+            overflow-y: auto;
+            position: fixed;
+            left: 0;
+            top: 0;
+            transition: transform 0.3s ease;
+            z-index: 1000;
+            box-shadow: 2px 0 5px rgba(0,0,0,0.1);
+        }
+
+        nav.hidden {
+            transform: translateX(-100%);
+        }
+
+        .nav-content {
+            padding: 20px;
+            padding-top: 60px;
+        }
+
+        nav ul {
+            list-style: none;
+        }
+
+        nav li {
+            margin-bottom: 12px;
+        }
+
+        nav a {
+            display: block;
+            padding: 12px 15px;
+            color: #333;
+            text-decoration: none;
+            border-radius: 6px;
+            transition: all 0.2s;
+            font-size: 14px;
+            line-height: 1.4;
+        }
+
+        nav a:hover {
+            background-color: #f0f0f0;
+        }
+
+        nav a.active {
+            background-color: #e3f2fd;
+            color: #1976d2;
+            font-weight: 500;
+        }
+
+        #content {
+            flex: 1;
+            margin-left: 300px;
+            transition: margin 0.3s ease;
+        }
+
+        #content.full-width {
+            margin-left: 0;
+        }
+
+        #documentFrame {
+            width: 100%;
+            height: 100vh;
+            border: none;
+            background: white;
+        }
+
+        .hamburger {
+            display: none;
+            position: fixed;
+            top: 10px;
+            left: 10px;
+            z-index: 2000;
+            cursor: pointer;
+            background: white;
+            border-radius: 50%;
+            width: 40px;
+            height: 40px;
+            flex-direction: column;
+            justify-content: center;
+            align-items: center;
+            box-shadow: 0 2px 5px rgba(0,0,0,0.2);
+        }
+
+        .hamburger div {
+            width: 20px;
+            height: 2px;
+            background: #333;
+            margin: 2px 0;
+            transition: 0.3s;
+        }
+
+        .hamburger.active div:nth-child(1) {
+            transform: rotate(45deg) translate(5px, 5px);
+        }
+
+        .hamburger.active div:nth-child(2) {
+            opacity: 0;
+        }
+
+        .hamburger.active div:nth-child(3) {
+            transform: rotate(-45deg) translate(5px, -5px);
+        }
+
+        @media (max-width: 768px) {
+            nav {
+                width: 280px;
+            }
+
+            #content {
+                margin-left: 0;
+            }
+
+            .hamburger {
+                display: flex;
+            }
+        }
+    </style>
+</head>
+<body>
+    <div class="hamburger" id="hamburger">
+        <div></div>
+        <div></div>
+        <div></div>
+    </div>
+    <div class="container">
+        <nav id="navMenu">
+            <div class="nav-content">
+                <ul id="documentList">
+                    <li><a href="spurningar/html/intro.html" target="documentFrame">Upplýsingar</a></li>
+                    <li><a href="spurningar/html/sp.1.html" target="documentFrame">1. Félagafrelsi og stéttarfélög</a></li>
+                    <li><a href="spurningar/html/sp.2.html" target="documentFrame">2. Kjarasamningagerð og verkfall/verkbann</a></li>
+                    <li><a href="spurningar/html/sp.3.html" target="documentFrame">3. Opinberir starfsmenn og reglur</a></li>
+                    <li><a href="spurningar/html/sp.4.html" target="documentFrame">4. Uppsögn opinberra starfsmanna</a></li>
+                    <li><a href="spurningar/html/sp.5.html" target="documentFrame">5. Fyrirvaralaus uppsögn og uppsögn með uppsagnarfresti</a></li>
+                    <li><a href="spurningar/html/sp.6.html" target="documentFrame">6. Ábyrgðasjóður launa</a></li>
+                    <li><a href="spurningar/html/sp.7.html" target="documentFrame">7. Launamaður og verktaki - réttindi og skyldur</a></li>
+                    <li><a href="spurningar/html/sp.8.html" target="documentFrame">8. Samkeppnisákvæði í ráðningarsamningum</a></li>
+                    <li><a href="spurningar/html/sp.9.html" target="documentFrame">9. Greiðsluskyld veikindi og áhrif uppsagna</a></li>
+                    <li><a href="spurningar/html/sp.10.html" target="documentFrame">10. Aðilaskipti að fyrirtækjum</a></li>
+                </ul>
+            </div>
+        </nav>
+        <div id="content">
+            <iframe name="documentFrame" id="documentFrame" frameborder="0"></iframe>
+        </div>
+    </div>
+
+    <script>
+        const hamburger = document.getElementById('hamburger');
+        const navMenu = document.getElementById('navMenu');
+        const content = document.getElementById('content');
+        const links = document.querySelectorAll('nav a');
+
+        // Toggle menu only on mobile
+        hamburger.addEventListener('click', () => {
+            if (window.innerWidth <= 768) {
+                navMenu.classList.toggle('hidden');
+                hamburger.classList.toggle('active');
+                content.classList.toggle('full-width');
+            }
+        });
+
+        // Handle link clicks
+        links.forEach(link => {
+            link.addEventListener('click', () => {
+                // Update active state
+                links.forEach(l => l.classList.remove('active'));
+                link.classList.add('active');
+
+                // On mobile, close menu after selection
+                if (window.innerWidth <= 768) {
+                    navMenu.classList.add('hidden');
+                    hamburger.classList.remove('active');
+                    content.classList.add('full-width');
+                }
+            });
+        });
+
+        // Set first document as active and load it
+        if (links.length > 0) {
+            links[0].classList.add('active');
+            document.getElementById('documentFrame').src = links[0].href;
+        }
+    </script>
+</body>
+</html>

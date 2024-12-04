@@ -1,0 +1,148 @@
+/* Reset default styles */
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+body {
+    font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+    line-height: 1.6;
+    color: #333;
+    display: flex;
+    flex-direction: column; /* Changed to column for better mobile layout */
+    min-height: 100vh;
+    margin: 0;
+}
+
+/* Navigation Sidebar */
+nav {
+    width: 100%; /* Changed to full width for mobile */
+    background-color: #f5f5f5;
+    padding: 20px; /* Increased padding */
+    border-bottom: 1px solid #ddd; /* Changed to bottom border for mobile */
+    position: relative; /* Changed to relative for mobile */
+    overflow-y: auto;
+}
+
+nav ul {
+    list-style: none;
+}
+
+nav ul li {
+    margin-bottom: 0.8rem; /* Slightly increased margin */
+}
+
+nav ul li a {
+    color: #333;
+    text-decoration: none;
+    padding: 0.8rem; /* Increased padding */
+    display: block;
+    border-radius: 4px;
+    transition: background-color 0.3s ease;
+}
+
+nav ul li a:hover {
+    background-color: #e0e0e0;
+    color: #000;
+}
+
+/* Main Content Area */
+#content {
+    flex: 1;
+    padding: 2rem; /* Significantly increased padding */
+}
+
+/* Typography */
+h1 {
+    font-size: 2rem;
+    margin-bottom: 1.5rem; /* Increased margin */
+    color: #2c3e50;
+}
+
+h2 {
+    font-size: 1.75rem;
+    margin: 2rem 0 1rem; /* Increased margins */
+    color: #34495e;
+}
+
+h3 {
+    font-size: 1.25rem;
+    margin: 1.5rem 0 1rem; /* Increased margins */
+    color: #445566;
+}
+
+p {
+    margin-bottom: 1.5rem; /* Increased margin */
+}
+
+/* Links in content */
+#content a {
+    color: #3498db;
+    text-decoration: none;
+}
+
+#content a:hover {
+    text-decoration: underline;
+}
+
+/* Code blocks */
+pre, code {
+    background-color: #f8f9fa;
+    border-radius: 4px;
+    padding: 1rem; /* Increased padding */
+    margin: 1rem 0; /* Increased margin */
+    overflow-x: auto;
+    font-family: 'Courier New', Courier, monospace;
+}
+
+/* Lists */
+ul, ol {
+    margin: 1rem 0; /* Increased margin */
+    padding-left: 2rem; /* Increased padding */
+}
+
+/* Images */
+img {
+    max-width: 100%;
+    height: auto;
+    margin: 1rem 0; /* Increased margin */
+    border-radius: 4px;
+}
+
+/* Blockquotes */
+blockquote {
+    border-left: 4px solid #3498db;
+    padding-left: 1rem; /* Increased padding */
+    margin: 1rem 0; /* Increased margin */
+    color: #666;
+    font-style: italic;
+}
+
+/* Tables */
+table {
+    width: 100%;
+    border-collapse: collapse;
+    margin: 1rem 0; /* Increased margin */
+}
+
+th, td {
+    padding: 0.8rem; /* Increased padding */
+    border: 1px solid #ddd;
+    text-align: left;
+}
+
+th {
+    background-color: #f5f5f5;
+}
+
+/* Print styles */
+@media print {
+    nav {
+        display: none;
+    }
+
+    #content {
+        margin-left: 0;
+    }
+}
